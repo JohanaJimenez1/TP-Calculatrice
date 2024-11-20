@@ -1,20 +1,26 @@
 pipeline {
-    agent any  
-
+    agent any
     stages {
-        stage('Build') {  
+        stage('Build') {
             steps {
                 echo 'Démarrage du build...'
-                bat 'node hello.js'
-             
             }
         }
-
-        stage('Test') {  
+        stage('Test') {
             steps {
-                echo 'Running tests...'
-                sh 'mvn test'  
+                echo 'Démarrage des tests...'
+                // Vérifier que le fichier index.html existe
+                bat '''
+                if exist index.html (
+                    echo "Fichier index.html présent"
+                ) else (
+                    echo "Fichier index.html manquant"
+                    exit /b 1
+                )
+                '''
             }
         }
+    }
 }
-}
+
+
