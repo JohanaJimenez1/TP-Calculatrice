@@ -4,8 +4,9 @@ pipeline {
     stages {
         stage('Build') {  
             steps {
-                echo 'Building the project...'
-                sh 'mvn clean package'  
+                echo 'Démarrage du build...'
+                bat 'node hello.js'
+             
             }
         }
 
